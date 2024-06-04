@@ -5,7 +5,7 @@
 
 class Car {
 public:
-    Car(std::string);
+    Car(std::string, char, char);
     bool startCar();
     bool driveCar();
     void info();
@@ -24,8 +24,8 @@ protected:
     bool start;
     bool drive;
 
-    static const char type;
-    static const char driving;
+    const char type;
+    const char driving;
 };
 
 inline void Car::makeSound() {

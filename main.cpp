@@ -24,19 +24,19 @@ int main() {
   SetColor(7, 0);
   cout << manual() << endl;
 
-  Car Gaba("Frog");
-  Gaba.info();
-  Gaba.driveCar();
-  Gaba.info();
-  Gaba.startCar();
-  Gaba.info();
-  Gaba.driveCar();
-  Gaba.info();
-  Gaba.startCar();
-  Gaba.info();
-  Gaba.driveCar();
-  Gaba.info();
-  Gaba.startCar();
-  Gaba.info();
+  Car car("Seat", 's', 'd');
+  car.info();
+  car.driveCar();
+  car.info();
+  car.startCar();
+  car.info();
+  car.driveCar();
+  car.info();
+  car.startCar();
+  car.info();
+  car.driveCar();
+  car.info();
+  car.startCar();
+  car.info();
   return 0;
 }
