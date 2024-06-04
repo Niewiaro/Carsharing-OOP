@@ -1,55 +1,42 @@
 #include <iostream>
 #include "car.h"
+#include "car_art.h"
+#include <windows.h>
+
 using namespace std;
 
-string subaruImpreza() {
-    return R"""(
-                                              _____________
-                                  ..---:::::::-----------. ::::;;.
-                               .' Next-Gen Car Sharing   ;;   \  ":._______,
-                            .''                          ;     \   "\-----|;
-                          .'                            ;;      ;   \\  /|;
-                        .'                              ;   _____;   \\/|;
-                      .'                               :; ;"     \ ___:'.|
-                    .'--...........................    : =   ____:"    \ \
-               ..-""                               """'  o"""     ;     ; :
-          .--""  .----- ..----...    _.-    --.  ..-"     ;       ;     ; ;
-       .""_-     "--""-----'""    _-"        .-""         ;        ;    .-.
-    .'  .'                      ."         ."              ;       ;   /. |
-   /-./'                      ."          /           _..  ;       ;   ;;;|
-  :  ;-.______               /       _________==.    /_  \ ;       ;   ;;;;
-  ;  / |      """"""""""".---."""""""          :    /" ". |;       ; _; ;;;
- /"-/  |      *         /   /                  /   /     ;|;      ;-" | ;';
-:-  :   """----______  /   /              ____.   .  ."'. ;;   .-"..T"   .
-'. "  ___            "":   '""""""""""""""    .   ; ; |  ;; ;." ."   '--"
- ",   __ """  ""---... :- - - - - - - - - ' '  ; ;  ; | /;;"  ."
-  /. ;  """---___                             ;  ; ; \|/ ;|.""
- :  ":           """----.    .-------.       ;   ; ; /|\ ;:
-  \  '--__               \   \        \     /    | ;/ | \;;
-   '-..   """"---___      :   .______..\ __/..-""|  ; | ; ;
-       ""--..       """--"                      .   ".|. ;
-             ""------...                  ..--""      " :
-                        """"""""""""""""""    \        /
-                                               "------"
-    )""";
+string manual() {
+  return R"""(
+Next-Gen Car Sharing API
+  )""";
+}
+
+void SetColor(int textColor, int bgColor) {
+    int color = (bgColor << 4) | textColor;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
 int main() {
-    cout << subaruImpreza() << endl;
+  SetColor(1, 0);
+  cout << SUBARU_IMPREZA << endl;
+  SetColor(0, 4);
+  cout << "Copyright C @Niewiaro 2024" << endl;
+  SetColor(7, 0);
+  cout << manual() << endl;
 
-    Car Gaba("Frog");
-    Gaba.info();
-    Gaba.driveCar();
-    Gaba.info();
-    Gaba.startCar();
-    Gaba.info();
-    Gaba.driveCar();
-    Gaba.info();
-    Gaba.startCar();
-    Gaba.info();
-    Gaba.driveCar();
-    Gaba.info();
-    Gaba.startCar();
-    Gaba.info();
-    return 0;
+  Car Gaba("Frog");
+  Gaba.info();
+  Gaba.driveCar();
+  Gaba.info();
+  Gaba.startCar();
+  Gaba.info();
+  Gaba.driveCar();
+  Gaba.info();
+  Gaba.startCar();
+  Gaba.info();
+  Gaba.driveCar();
+  Gaba.info();
+  Gaba.startCar();
+  Gaba.info();
+  return 0;
 }
