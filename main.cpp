@@ -14,8 +14,9 @@ void manual() {
 Next-Gen Car Sharing API
 
 [1]   - show all cars
-[2]   - add new car
-[3]   - remove all cars
+[2]   - show selected car
+[3]   - add new car
+[0]   - remove all cars
 [m]   - manual
 [ESC] - program end
   )""" << endl;
@@ -62,6 +63,18 @@ int main() {
         else if (selectedOption == '1')
             showAllCars(cars);
         else if (selectedOption == '2') {
+            if (cars.size() > 0) {
+                cout << "Enter the car index:" << endl;
+                cin >> carIndex;
+                if (carIndex > 0 && carIndex <= cars.size()) {
+                    cout << cars[carIndex - 1] << endl;
+                } else {
+                    cout << "Invalid index" << endl;
+                }
+            } else {
+                cout << "Car network is empty." << endl;
+            }
+        } else if (selectedOption == '3') {
             cout << "Enter the car brand:" << endl;
             cin >> brand;
 
@@ -91,7 +104,7 @@ int main() {
             } while (!(driving == 'e' || driving == 'E' || driving == 'd' ||
                        driving == 'D' || driving == 'p' || driving == 'P'));
             cars.emplace_back(brand, type, driving);
-        } else if (selectedOption == '3') {
+        } else if (selectedOption == '0') {
             if (cars.size() > 0) {
                 cars.clear();
             } else {
