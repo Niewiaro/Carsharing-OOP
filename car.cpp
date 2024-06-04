@@ -107,7 +107,7 @@ string decodeType(char c) {
 // }
 
 ostream& operator<<(ostream &os, const Car &car) {
-    os << decodeDriving(car.driving) << " " << decodeType(car.type) << " " << car.brand << "\t\twith SN: " << car.serialNumber << "\t\tis now:" << endl;
+    os << car.brand << " " << decodeDriving(car.driving) << " " << decodeType(car.type) << "\t\twith SN: " << car.serialNumber << "\t\tis now:" << endl;
     if( car.start ) {
         os << "\tonline";
 
