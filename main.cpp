@@ -2,12 +2,17 @@
 #include "car.h"
 #include "car_art.h"
 #include <windows.h>
+#include <conio.h>
+#include <vector>
 
 using namespace std;
 
 string manual() {
   return R"""(
 Next-Gen Car Sharing API
+
+[m]   - manual
+[ESC] - program end
   )""";
 }
 
@@ -23,6 +28,17 @@ int main() {
   cout << "Copyright C @Niewiaro 2024" << endl;
   SetColor(7, 0);
   cout << manual() << endl;
+
+  unsigned char selectedOption;
+  do
+    {
+        selectedOption = getch();
+        if (selectedOption == 'm')
+          cout << manual() << endl;
+        cout << endl;
+    } while( selectedOption != 27 ); //ESC
+
+  vector<Car> cars;
 
   Car car("Seat", 's', 'd');
   car.info();
