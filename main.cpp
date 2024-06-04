@@ -7,13 +7,20 @@
 
 using namespace std;
 
-string manual() {
-  return R"""(
+void manual() {
+  cout << R"""(
 Next-Gen Car Sharing API
 
+[1]   - show all cars
 [m]   - manual
 [ESC] - program end
-  )""";
+  )""" << endl;
+}
+
+void showAllCars(const std::vector<Car> &cars) {
+  for (const auto& car : cars) {
+    cout << car << " ";
+  }
 }
 
 void SetColor(int textColor, int bgColor) {
@@ -27,32 +34,34 @@ int main() {
   SetColor(0, 4);
   cout << "Copyright C @Niewiaro 2024" << endl;
   SetColor(7, 0);
-  cout << manual() << endl;
+  manual();
 
+  vector<Car> cars;
   unsigned char selectedOption;
   do
     {
         selectedOption = getch();
         if (selectedOption == 'm')
-          cout << manual() << endl;
+          manual();
+        if (selectedOption == '1')
+          showAllCars(cars); 
         cout << endl;
     } while( selectedOption != 27 ); //ESC
 
-  vector<Car> cars;
 
   Car car("Seat", 's', 'd');
-  car.info();
+  cout << car;
   car.driveCar();
-  car.info();
+  cout << car;
   car.startCar();
-  car.info();
+  cout << car;
   car.driveCar();
-  car.info();
+  cout << car;
   car.startCar();
-  car.info();
+  cout << car;
   car.driveCar();
-  car.info();
+  cout << car;
   car.startCar();
-  car.info();
+  cout << car;
   return 0;
 }

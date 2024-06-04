@@ -15,6 +15,8 @@ public:
     static int getAmountOfDrivingCars();
     const long long int serialNumber;
 
+    friend std::ostream& operator<<(std::ostream &os, const Car &car);
+
 protected:
     const std::string brand;
     static int amountActive;

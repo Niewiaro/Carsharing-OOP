@@ -90,20 +90,37 @@ string decodeType(char c) {
     return "undefined";
 }
 
-void Car::info() {
-    cout << decodeDriving(driving) << " " << decodeType(type) << " " << brand << "\t\twith SN: " << serialNumber << "\t\tis now:" << endl;
-    if( start ) {
-        cout << "\tonline";
+// void Car::info() {
+//     cout << decodeDriving(driving) << " " << decodeType(type) << " " << brand << "\t\twith SN: " << serialNumber << "\t\tis now:" << endl;
+//     if( start ) {
+//         cout << "\tonline";
 
-        if( drive ) {
-            cout << ", driving";
+//         if( drive ) {
+//             cout << ", driving";
+//         } else {
+//             cout << ", not driving";
+//         }
+//     } else {
+//         cout << "\toffline";
+//     }
+//     cout << "." << endl;
+// }
+
+ostream& operator<<(ostream &os, const Car &car) {
+    os << decodeDriving(car.driving) << " " << decodeType(car.type) << " " << car.brand << "\t\twith SN: " << car.serialNumber << "\t\tis now:" << endl;
+    if( car.start ) {
+        os << "\tonline";
+
+        if( car.drive ) {
+            os << ", driving";
         } else {
-            cout << ", not driving";
+            os << ", not driving";
         }
     } else {
-        cout << "\toffline";
+        os << "\toffline";
     }
-    cout << "." << endl;
+    os << "." << endl;
+    return os;
 }
 
 #pragma package( smart_init )
