@@ -1,31 +1,38 @@
+#include <conio.h>
+#include <windows.h>
+
 #include <iostream>
+#include <vector>
+
 #include "car.h"
 #include "car_art.h"
-#include <windows.h>
-#include <conio.h>
-#include <vector>
 
 using namespace std;
 
 void manual() {
-  cout << R"""(
+    cout << R"""(
 Next-Gen Car Sharing API
 
 [1]   - show all cars
 [2]   - add new car
+[3]   - remove all cars
 [m]   - manual
 [ESC] - program end
   )""" << endl;
 }
 
 void showAllCars(const std::vector<Car> &cars) {
-  // for (const auto& car : cars) 
-  //   cout << car << " ";
-  cout << "Cars in network:" << endl;
-  for (size_t i = 0; i < cars.size(); ++i) {
-    cout << i + 1 << ". " << cars[i] << endl;
-  }
-  cout << endl;
+    // for (const auto& car : cars)
+    //   cout << car << " ";
+    if (cars.size() == 0)
+        cout << "Car network is empty" << endl;
+    else {
+        cout << "Cars in network:" << endl;
+        for (size_t i = 0; i < cars.size(); ++i) {
+            cout << i + 1 << ". " << cars[i] << endl;
+        }
+        cout << endl;
+    }
 }
 
 void SetColor(int textColor, int bgColor) {
@@ -34,70 +41,81 @@ void SetColor(int textColor, int bgColor) {
 }
 
 int main() {
-  SetColor(1, 0);
-  cout << SUBARU_IMPREZA << endl;
-  SetColor(0, 4);
-  cout << "Copyright C @Niewiaro 2024" << endl;
-  SetColor(7, 0);
-  manual();
+    SetColor(1, 0);
+    cout << SUBARU_IMPREZA << endl;
+    SetColor(0, 4);
+    cout << "Copyright C @Niewiaro 2024" << endl;
+    SetColor(7, 0);
+    manual();
 
-  vector<Car> cars;
-  // cars.emplace_back("Seat", 's', 'd');
-  unsigned char selectedOption;
-  string brand = "";
-  char type, driving = '\0';
+    vector<Car> cars;
+    // cars.emplace_back("Seat", 's', 'd');
+    unsigned char selectedOption;
+    string brand = "";
+    char type, driving = '\0';
+    int carIndex = 0;
 
-  do {
+    do {
         selectedOption = getch();
         if (selectedOption == 'm')
-          manual();
+            manual();
         else if (selectedOption == '1')
-          showAllCars(cars); 
+            showAllCars(cars);
         else if (selectedOption == '2') {
-          cout << "Enter the car brand:" << endl;
-          cin >> brand;
+            cout << "Enter the car brand:" << endl;
+            cin >> brand;
 
-          do {
-            cout << "Select type:" << endl;
-            cout << R"""(
+            do {
+                cout << "Select type:" << endl;
+                cout << R"""(
 [l] - sedan
 [s] - SUV
 [h] - hatchback
 [c] - cabriolet
 [p] - pick-up
             )""" << endl;
-            type = getch();
-          } while (!(type == 'l' || type == 'L' || type == 's' || type == 'S' || type == 'h' || type == 'H' || type == 'c' || type == 'C' || type == 'p' || type == 'P'));
+                type = getch();
+            } while (!(type == 'l' || type == 'L' || type == 's' ||
+                       type == 'S' || type == 'h' || type == 'H' ||
+                       type == 'c' || type == 'C' || type == 'p' ||
+                       type == 'P'));
 
-          do {
-            cout << "Select driving:" << endl;
-            cout << R"""(
+            do {
+                cout << "Select driving:" << endl;
+                cout << R"""(
 [e] - electric
 [d] - diesel
 [p] - petrol
             )""" << endl;
-            driving = getch();
-          } while (!(driving == 'e' || driving == 'E' || driving == 'd' || driving == 'D' || driving == 'p' || driving == 'P'));
-          cars.emplace_back(brand, type, driving);
+                driving = getch();
+            } while (!(driving == 'e' || driving == 'E' || driving == 'd' ||
+                       driving == 'D' || driving == 'p' || driving == 'P'));
+            cars.emplace_back(brand, type, driving);
+        } else if (selectedOption == '3') {
+            if (cars.size() > 0) {
+                cars.clear();
+            } else {
+                cout << "Car network is empty." << endl;
+            }
         }
-        else 
-          cout << "Unkwnon command" << endl;
+
+        else
+            cout << "Unkwnon command" << endl;
         cout << endl;
-    } while( selectedOption != 27 ); //ESC
+    } while (selectedOption != 27);  // ESC
 
-
-  // cout << car;
-  // car.driveCar();
-  // cout << car;
-  // car.startCar();
-  // cout << car;
-  // car.driveCar();
-  // cout << car;
-  // car.startCar();
-  // cout << car;
-  // car.driveCar();
-  // cout << car;
-  // car.startCar();
-  // cout << car;
-  return 0;
+    // cout << car;
+    // car.driveCar();
+    // cout << car;
+    // car.startCar();
+    // cout << car;
+    // car.driveCar();
+    // cout << car;
+    // car.startCar();
+    // cout << car;
+    // car.driveCar();
+    // cout << car;
+    // car.startCar();
+    // cout << car;
+    return 0;
 }
