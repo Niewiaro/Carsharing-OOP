@@ -34,6 +34,17 @@ Car::Car(string brand, char type, char driving): brand(brand), type(type), drivi
     amountActive++;
 }
 
+Car::~Car() {
+    cout << "*sad car noise*" << endl;
+
+    amountActive--;
+
+    if( start )
+        amountOnline++;
+    if( drive )
+        amountDriving++;
+}
+
 bool Car::startCar() {
     if( !drive ) {
         if( start ) {

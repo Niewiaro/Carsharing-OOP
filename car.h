@@ -6,6 +6,7 @@
 class Car {
 public:
     Car(std::string, char, char);
+    ~Car();
     bool startCar();
     bool driveCar();
     // void info();
