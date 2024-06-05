@@ -1,5 +1,3 @@
-Oto analogiczne README dla Twojego nowego projektu:
-
 # Carsharing-OOP
 > Next-Gen Car Sharing API simulation written in C++ and C.
 
