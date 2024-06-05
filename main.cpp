@@ -58,7 +58,7 @@ int main() {
     char type, driving, ch = '\0';
     int carIndex = 0;
 
-    do {
+    for (;;) {
         selectedOption = getch();
         if (selectedOption == 'm')
             manual();
@@ -172,12 +172,12 @@ int main() {
                 cars.clear();
             else 
                 cout << "Car network is empty." << endl;
-        }
-
-        else
+        } else if (selectedOption == 27) //ESC
+            break;
+        else 
             cout << "Unkwnon command" << endl;
         cout << endl;
-    } while (selectedOption != 27);  // ESC
+    }
 
     // cout << car;
     // car.driveCar();

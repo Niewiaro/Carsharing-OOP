@@ -35,7 +35,7 @@ Car::Car(string brand, char type, char driving): brand(brand), type(type), drivi
 }
 
 Car::~Car() {
-    cout << "*sad car noise*" << endl;
+    // cout << "*sad car noise*" << endl;
 
     amountActive--;
 
