@@ -12,10 +12,13 @@ using namespace std;
 void manual() {
     cout << R"""(
 Next-Gen Car Sharing API
+This is terminal to manage all cars in your Next-Gen Car Sharing network.
+Press one of below key to perform action:
 
 [1]   - show all cars
 [2]   - show selected car
-[3]   - add new car
+[3]   - select car
+[4]   - add new car
 [0]   - remove all cars
 [m]   - manual
 [ESC] - program end
@@ -29,9 +32,9 @@ void showAllCars(const std::vector<Car> &cars) {
         cout << "Car network is empty" << endl;
     else {
         cout << "Cars in network:" << endl;
-        for (size_t i = 0; i < cars.size(); ++i) {
+        for (size_t i = 0; i < cars.size(); ++i) 
             cout << i + 1 << ". " << cars[i] << endl;
-        }
+        
         cout << endl;
     }
 }
@@ -50,10 +53,9 @@ int main() {
     manual();
 
     vector<Car> cars;
-    // cars.emplace_back("Seat", 's', 'd');
     unsigned char selectedOption;
     string brand = "";
-    char type, driving = '\0';
+    char type, driving, ch = '\0';
     int carIndex = 0;
 
     do {
@@ -66,17 +68,63 @@ int main() {
             if (cars.size() > 0) {
                 cout << "Enter the car index:" << endl;
                 cin >> carIndex;
+                if (carIndex > 0 && carIndex <= cars.size()) 
+                    cout << cars[carIndex - 1] << endl;
+                else 
+                    cout << "Invalid index" << endl;
+                
+            } else 
+                cout << "Car network is empty." << endl;
+            
+        } else if (selectedOption == '3') {
+            if (cars.size() > 0) {
+                cout << "Enter the car index:" << endl;
+                cin >> carIndex;
                 if (carIndex > 0 && carIndex <= cars.size()) {
                     cout << cars[carIndex - 1] << endl;
-                } else {
+
+                    do {
+                        cout << "Select type:" << endl;
+                        cout << R"""(
+[p] - power
+[d] - drive
+                        )""" << endl;
+                        ch = getch();
+                        if (ch == 27) {
+                            cout << "\nOperation canceled." << endl << endl;
+                            break;
+                        }
+                    } while (!(ch == 'p' || ch == 'P' || ch == 'd' ||
+                            ch == 'D'));
+
+                    if (ch == 27) 
+                        continue; 
+                    else if (ch == 'p')
+                        cars[carIndex - 1].startCar();
+                    else if (ch == 'd')
+                        cars[carIndex - 1].driveCar();
+                } else 
                     cout << "Invalid index" << endl;
-                }
-            } else {
+                
+            } else 
                 cout << "Car network is empty." << endl;
+            
+        } else if (selectedOption == '4') {
+            cout << "Enter the car brand (press ESC to cancel):" << endl;
+
+            brand.clear();
+            while ((ch = getch()) != 27) {
+                if (ch == '\r') {
+                    cout << endl;
+                    break;
+                }
+                cout << ch;
+                brand += ch;
             }
-        } else if (selectedOption == '3') {
-            cout << "Enter the car brand:" << endl;
-            cin >> brand;
+            if (ch == 27) {  
+                cout << "\nOperation canceled." << endl << endl;
+                continue; 
+            }
 
             do {
                 cout << "Select type:" << endl;
@@ -86,12 +134,19 @@ int main() {
 [h] - hatchback
 [c] - cabriolet
 [p] - pick-up
-            )""" << endl;
+        )""" << endl;
                 type = getch();
+                if (type == 27) {
+                    cout << "\nOperation canceled." << endl << endl;
+                    break;
+                }
             } while (!(type == 'l' || type == 'L' || type == 's' ||
                        type == 'S' || type == 'h' || type == 'H' ||
                        type == 'c' || type == 'C' || type == 'p' ||
                        type == 'P'));
+
+            if (type == 27) 
+                continue; 
 
             do {
                 cout << "Select driving:" << endl;
@@ -99,17 +154,24 @@ int main() {
 [e] - electric
 [d] - diesel
 [p] - petrol
-            )""" << endl;
+        )""" << endl;
                 driving = getch();
+                if (driving == 27) {  
+                    cout << "\nOperation canceled." << endl << endl;
+                    break;
+                }
             } while (!(driving == 'e' || driving == 'E' || driving == 'd' ||
                        driving == 'D' || driving == 'p' || driving == 'P'));
+
+            if (driving == 27) 
+                continue;     
+
             cars.emplace_back(brand, type, driving);
         } else if (selectedOption == '0') {
-            if (cars.size() > 0) {
+            if (cars.size() > 0) 
                 cars.clear();
-            } else {
+            else 
                 cout << "Car network is empty." << endl;
-            }
         }
 
         else

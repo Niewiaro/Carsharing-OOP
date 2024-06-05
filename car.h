@@ -8,7 +8,7 @@ public:
     Car(std::string, char, char);
     bool startCar();
     bool driveCar();
-    void info();
+    // void info();
     virtual inline void makeSound();
     static int getAmountOfActiveCars();
     static int getAmountOfOnlineCars();

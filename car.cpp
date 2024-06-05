@@ -3,9 +3,9 @@
 #include <iostream>
 using namespace std;
 
-void blink(int amount) {
+void blink(int amount, string str = "blink ") {
     for(int i= 0; i< amount; i++){
-        cout << "blink ";
+        cout << str;
     }
     cout << endl;
 }
@@ -55,11 +55,13 @@ bool Car::driveCar() {
     if( start ) {
         if( drive ) {
             drive= false;
+            blink(1, "wroom ");
             amountDriving++;
             return true;
         }
 
         amountDriving--;
+        blink(2, "wroom ");
         drive= true;
         return true;
     }
